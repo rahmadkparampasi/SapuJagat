@@ -8,11 +8,11 @@ use App\Models\UmMdl;
 class Controller extends BaseController
 {
     use ResponseTrait;
-    protected $MdlU;
+    protected $MdlSp;
 
     public function __construct()
     {
-        $this->MdlU = new UmMdl('table1', 'id_table1');
+        $this->MdlSp = new SpMdl('table1', 'id_table1');
     }
 
     public function index()
@@ -37,7 +37,7 @@ class Controller extends BaseController
             'param1' => $param1,
         ];
 
-        $insertData = $this->MdlU->insertData($data);
+        $insertData = $this->MdlSp->insertData($data);
         if ($insertData) {
             $data = ['status' => 200, 'response' => 'success', 'message' => 'Successfully Save Data!'];
         } else {
@@ -55,7 +55,7 @@ class Controller extends BaseController
         $data = [
             'param1' => $param1,
         ];
-        $updateData = $this->MdlU->updateData($data, $id_table1);
+        $updateData = $this->MdlSp->updateData($data, $id_table1);
         if ($updateData) {
             $data = ['status' => 200, 'response' => 'success', 'message' => 'Successfully Changed Data !'];
         } else {
@@ -69,7 +69,7 @@ class Controller extends BaseController
         if ($id_table1 === null || $id_table1 == '') {
             $data = ['status' => 404, 'response' => 'error', 'message' => 'No ID'];
         } else {
-            $deleteData = $this->MdlU->deleteData($id_table1);
+            $deleteData = $this->MdlSp->deleteData($id_table1);
             if ($deleteData) {
                 $data = ['status' => 200, 'response' => 'success', 'message' => 'Successfully Delete Data!'];
             } else {
@@ -88,7 +88,7 @@ class Controller extends BaseController
         $fillUpdate = 'id_table1, param1';
 
         if ($request == 'getAll') {
-            return $this->MdlU->getAll(
+            return $this->MdlSp->getAll(
                 $typeGet,
                 // select *
                 '*',
@@ -118,7 +118,7 @@ class Controller extends BaseController
             );
         } elseif ($request == 'fillUpdate') {
             $typeGet = 'row';
-            return $this->MdlU->getAll(
+            return $this->MdlSp->getAll(
                 //type result / row
                 $typeGet,
                 // select *
